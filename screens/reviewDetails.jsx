@@ -1,16 +1,16 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
+import { globalStyles } from "./../styles/global";
+import Card from "../shared/card";
 
-export default function ReviewDetails() {
+export default function ReviewDetails({ navigation }) {
  return (
-  <View style={styles.container}>
-   <Text>ReviewDetails Screen</Text>
+  <View style={globalStyles.container}>
+   <Card>
+    <Text>{navigation.getParam("title")}</Text>
+    <Text>{navigation.getParam("body")}</Text>
+    <Text>{navigation.getParam("rating")}</Text>
+   </Card>
   </View>
  );
 }
-
-const styles = StyleSheet.create({
- container: {
-  padding: 24
- }
-});

@@ -1,20 +1,49 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useState } from "react";
+import {
+ StyleSheet,
+ View,
+ Text,
+ FlatList,
+ TouchableOpacity
+} from "react-native";
+import { globalStyles } from "./../styles/global";
+import Card from "./../shared/card";
 
-export default function Home() {
+export default function Home({ navigation }) {
+ const [reviews, setReviews] = useState([
+  {
+   title: "Zelda. Breath of Fresh Air",
+   rating: 5,
+   body: "lorem ipsun",
+   key: "1"
+  },
+  {
+   title: "Gotta Catch Them All (again)",
+   rating: 4,
+   body: "lorem ipsun",
+   key: "2"
+  },
+  {
+   title: "Not so, 'Final' Fantasy",
+   rating: 3,
+   body: "lorem ipsun",
+   key: "3"
+  }
+ ]);
  return (
-  <View style={styles.container}>
-   <Text style={styles.titleText}>Home Screen</Text>
+  <View style={globalStyles.container}>
+   <FlatList
+    data={reviews}
+    renderItem={({ item }) => (
+     <TouchableOpacity
+      onPress={() => navigation.navigate("ReviewDetails", item)}
+     >
+      <Card>
+       <Text style={globalStyles.titleText}>{item.title}</Text>
+      </Card>
+     </TouchableOpacity>
+    )}
+   />
   </View>
  );
 }
-
-const styles = StyleSheet.create({
- container: {
-  padding: 24
- },
- titleText: {
-  fontFamily: "nunito-bold",
-  fontSize: 18
- }
-});
